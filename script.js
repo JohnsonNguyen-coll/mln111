@@ -34,6 +34,19 @@ class ArtisticCalendar {
       "Lý luận mà không có thực tiễn là lý luận suông, thực tiễn mà không có lý luận là thực tiễn mù quáng.",
     ];
 
+    // Mảng chứa tên các ảnh background
+    this.backgroundImages = [
+      "january.jpg",
+      "z7501574550180_8a17035f176f291369ae86a0bf6176c5.jpg",
+      "z7501574609054_feb77de7cf6248fc33326ddd8b9c7754.jpg",
+      "z7501574651744_b529a7755ac6d588a01b5b9dc467561b.jpg",
+      "z7501574651745_82fa85d1a0f501a9f596f8b3e5f4e7a9.jpg",
+      "z7501574651775_8d20439bf5f482e5b4140bd157be77c4.jpg",
+      "z7501574651776_d760b492fd792891f1dd82519edaf28d.jpg",
+      "z7501574651777_3a312d37da78d62c436b0e64f476498c.jpg",
+      "z7501574690537_26e79fae2fdd37fd408ea926c1cde6ea.jpg"
+    ];
+
     this.questions = [
       {
         question: "Triết học là gì?",
@@ -1254,13 +1267,22 @@ class ArtisticCalendar {
           String.fromCharCode(65 + correctIndex) +
           "</span>";
 
-    // Auto close after 3 seconds
-    setTimeout(() => {
-      this.closeQuestionPopup();
-    }, 3000);
+    // Chỉ tự động đóng sau 2 giây nếu trả lời đúng
+    if (selectedIndex === correctIndex) {
+      this.autoCloseTimeout = setTimeout(() => {
+        this.closeQuestionPopup();
+      }, 2000);
+    }
+    // Nếu trả lời sai thì popup sẽ mở vĩnh viễn cho đến khi user ấn close
   }
 
   closeQuestionPopup() {
+    // Clear timeout nếu có để tránh popup sau bị đóng tự động
+    if (this.autoCloseTimeout) {
+      clearTimeout(this.autoCloseTimeout);
+      this.autoCloseTimeout = null;
+    }
+    
     const popup = document.getElementById("questionPopup");
     if (popup) {
       popup.classList.remove("show");
@@ -1279,13 +1301,18 @@ class ArtisticCalendar {
   updateDecorations() {
     const card = document.querySelector(".calendar-card");
 
-    // Change background gradient based on month
-    const hue = (this.currentMonth * 30) % 360;
-    const lightness = 85 + (this.currentMonth % 3) * 5;
-
-    card.style.background = `linear-gradient(135deg, 
-            hsl(${hue}, 20%, ${lightness}%) 0%, 
-            hsl(${hue + 20}, 25%, ${lightness - 5}%) 100%)`;
+    // Chọn ảnh background dựa trên tháng hiện tại
+    const imageIndex = this.currentMonth % this.backgroundImages.length;
+    const backgroundImage = this.backgroundImages[imageIndex];
+    
+    // Thiết lập background image với overlay nhẹ để ảnh rõ hơn
+    card.style.background = `
+      linear-gradient(rgba(248, 245, 240, 0.3), rgba(237, 231, 223, 0.3)),
+      url('images/${backgroundImage}')
+    `;
+    card.style.backgroundSize = 'cover';
+    card.style.backgroundPosition = 'center';
+    card.style.backgroundRepeat = 'no-repeat';
 
     // Animate decorative elements
     this.animateDecorations();
