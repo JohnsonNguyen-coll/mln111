@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8f5f0"/>
+      <stop offset="100%" style="stop-color:#ede7df"/>
+    </linearGradient>
+    <linearGradient id="header" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#34495e"/>
+      <stop offset="100%" style="stop-color:#2c3e50"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="32" height="32" rx="6" fill="url(#bg)" stroke="#d4c4b8" stroke-width="1"/>
+  
+  <!-- Header -->
+  <rect x="2" y="2" width="28" height="8" rx="2" fill="url(#header)"/>
+  
+  <!-- Calendar grid -->
+  <g fill="#2c3e50" font-family="Arial, sans-serif" font-size="3" text-anchor="middle">
+    <!-- Week days (small dots) -->
+    <circle cx="6" cy="15" r="0.5" fill="#7f8c8d"/>
+    <circle cx="10" cy="15" r="0.5" fill="#7f8c8d"/>
+    <circle cx="14" cy="15" r="0.5" fill="#7f8c8d"/>
+    <circle cx="18" cy="15" r="0.5" fill="#7f8c8d"/>
+    <circle cx="22" cy="15" r="0.5" fill="#7f8c8d"/>
+    <circle cx="26" cy="15" r="0.5" fill="#7f8c8d"/>
+    <circle cx="30" cy="15" r="0.5" fill="#7f8c8d"/>
+    
+    <!-- Date numbers -->
+    <text x="6" y="21" font-size="2.5">1</text>
+    <text x="10" y="21" font-size="2.5">2</text>
+    <text x="14" y="21" font-size="2.5">3</text>
+    <text x="18" y="21" font-size="2.5">4</text>
+    <text x="22" y="21" font-size="2.5">5</text>
+    <text x="26" y="21" font-size="2.5">6</text>
+    <text x="30" y="21" font-size="2.5">7</text>
+    
+    <text x="6" y="26" font-size="2.5">8</text>
+    <text x="10" y="26" font-size="2.5">9</text>
+    <!-- Highlight today -->
+    <circle cx="14" cy="24.5" r="2" fill="#e74c3c"/>
+    <text x="14" y="26" font-size="2.5" fill="white" font-weight="bold">10</text>
+    <text x="18" y="26" font-size="2.5">11</text>
+    <text x="22" y="26" font-size="2.5">12</text>
+    <text x="26" y="26" font-size="2.5">13</text>
+    <text x="30" y="26" font-size="2.5">14</text>
+  </g>
+  
+  <!-- Small decorative element -->
+  <circle cx="26" cy="6" r="1.5" fill="#f4d03f" opacity="0.8"/>
+</svg>
