@@ -21,15 +21,13 @@ body {
 .calendar-card {
     width: 800px;
     height: 600px;
-    background: linear-gradient(135deg, #f8f5f0 0%, #ede7df 100%);
     border-radius: 20px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     position: relative;
     overflow: hidden;
     transition: all 0.6s ease;
     cursor: pointer;
-    /* Đảm bảo background image hiển thị tốt */
-    background-attachment: fixed;
+    /* Chỉ dùng background image, không có background mặc định */
 }
 
 .calendar-card:hover {
@@ -232,7 +230,7 @@ body {
     text-align: center;
     font-style: italic;
     padding: 15px;
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.4);
     border-radius: 10px;
     backdrop-filter: blur(8px);
     font-family: Arial, sans-serif;

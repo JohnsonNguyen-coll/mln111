@@ -1118,24 +1118,35 @@ class ArtisticCalendar {
 
   animateTransition(callback) {
     const content = document.querySelector(".calendar-content");
-    content.classList.add("flip-out");
-
-    setTimeout(() => {
-      callback();
-      content.classList.remove("flip-out");
-      content.classList.add("flip-in");
+    
+    // Preload background image trước khi animation để tránh nháy
+    const imageIndex = this.currentMonth % this.backgroundImages.length;
+    const backgroundImage = this.backgroundImages[imageIndex];
+    const img = new Image();
+    img.onload = () => {
+      // Thay đổi background ngay khi image đã load
+      this.updateDecorations();
+      
+      content.classList.add("flip-out");
 
       setTimeout(() => {
-        content.classList.remove("flip-in");
-      }, 400);
-    }, 200);
+        callback();
+        content.classList.remove("flip-out");
+        content.classList.add("flip-in");
+
+        setTimeout(() => {
+          content.classList.remove("flip-in");
+        }, 400);
+      }, 200);
+    };
+    img.src = `images/${backgroundImage}`;
   }
 
   render() {
     this.renderMonth();
     this.renderDays();
     this.renderQuote();
-    this.updateDecorations();
+    // Không gọi updateDecorations ở đây nữa vì đã gọi trong animateTransition
   }
 
   renderMonth() {
@@ -1305,9 +1316,9 @@ class ArtisticCalendar {
     const imageIndex = this.currentMonth % this.backgroundImages.length;
     const backgroundImage = this.backgroundImages[imageIndex];
     
-    // Thiết lập background image với overlay nhẹ để ảnh rõ hơn
-    card.style.background = `
-      linear-gradient(rgba(248, 245, 240, 0.3), rgba(237, 231, 223, 0.3)),
+    // Chỉ dùng background image với overlay nhẹ, không có gradient cũ
+    card.style.backgroundImage = `
+      linear-gradient(rgba(248, 245, 240, 0.25), rgba(237, 231, 223, 0.25)),
       url('images/${backgroundImage}')
     `;
     card.style.backgroundSize = 'cover';
